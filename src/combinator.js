@@ -4,6 +4,7 @@ var util = require("util");
 var Duplex = stream.Duplex;
 var Promise = require("bluebird");
 var Error = require("@petitchevalroux/error");
+var sort = require("sort-stream");
 
 function CombinatorStream(options) {
     if (!(this instanceof CombinatorStream)) {
@@ -14,6 +15,18 @@ function CombinatorStream(options) {
     this.FeedParser = require("feedparser");
     this.request = require("request");
     this.async = require("async");
+    this.sortStream = sort(function(a, b) {
+        try {
+            if (a.pubDate > b.pubDate) {
+                return -1;
+            } else if (a.pubDate < b.pubDate) {
+                return 1;
+            }
+        } catch (err) {
+            return 0;
+        }
+        return 0;
+    });
     delete options.concurrency;
     options.readableObjectMode = true;
     Duplex.call(this, options);
@@ -125,6 +138,28 @@ CombinatorStream.prototype.parse = function(url) {
             reject(err);
         }
     });
+};
+
+/**
+ * Call when output stream is piped
+ * @param {WritableStream} out
+ * @returns {ReadableStream}
+ */
+CombinatorStream.prototype.pipe = function(out) {
+    // Pipe sort stream to combinator
+    Duplex.prototype.pipe.apply(this, [this.sortStream]);
+    // Pipe output to readable stream
+    return this.sortStream.pipe(out);
+};
+
+/**
+ * Call when output stream is unpiped
+ * @param {WritableStream} out
+ * @returns {ReadableStream}
+ */
+CombinatorStream.prototype.unpipe = function() {
+    // Unpipe sortStream from combinator
+    Duplex.prototype.unpipe.apply(this, [this.sortStream]);
 };
 
 util.inherits(CombinatorStream, Duplex);
