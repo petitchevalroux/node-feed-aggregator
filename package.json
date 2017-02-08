@@ -1,21 +1,21 @@
 {
-  "name": "node-feed-combinator",
-  "version": "1.0.0",
-  "description": "Duplex stream which combine rss/atom feeds",
-  "main": "./src/combinator.js",
+  "name": "@petitchevalroux/node-feed-aggregator",
+  "version": "0.0.0",
+  "description": "Duplex stream and cli utility which aggregate rss/atom feeds",
+  "main": "./src/aggregator.js",
   "scripts": {
     "test": "make tests"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://github.com/petitchevalroux/node-feed-combinator.git"
+    "url": "git+ssh://github.com/petitchevalroux/node-feed-aggregator.git"
   },
   "author": "Patrick Poulain",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/petitchevalroux/node-feed-combinator/issues"
+    "url": "https://github.com/petitchevalroux/node-feed-aggregator/issues"
   },
-  "homepage": "https://github.com/petitchevalroux/node-feed-combinator#readme",
+  "homepage": "https://github.com/petitchevalroux/node-feed-aggregator#readme",
   "devDependencies": {
     "eslint": "^3.3.1",
     "eslint-plugin-promise": "^2.0.1",

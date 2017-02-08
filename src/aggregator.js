@@ -6,9 +6,9 @@ var Promise = require("bluebird");
 var Error = require("@petitchevalroux/error");
 var sort = require("sort-stream");
 
-function CombinatorStream(options) {
-    if (!(this instanceof CombinatorStream)) {
-        return new CombinatorStream(options);
+function AggregatorStream(options) {
+    if (!(this instanceof AggregatorStream)) {
+        return new AggregatorStream(options);
     }
     options = options || {};
     this.concurrency = options.concurrency ? options.concurrency : 2;
@@ -57,7 +57,7 @@ function CombinatorStream(options) {
  * @param {type} cb
  * @returns {undefined}
  */
-CombinatorStream.prototype._write = function(chunk, enc, cb) {
+AggregatorStream.prototype._write = function(chunk, enc, cb) {
     this.queue.push(typeof chunk === "string" ? chunk : chunk.toString());
     cb();
 };
@@ -66,7 +66,7 @@ CombinatorStream.prototype._write = function(chunk, enc, cb) {
  * Read items extracted from feeds
  * @returns {undefined}
  */
-CombinatorStream.prototype._read = function() {
+AggregatorStream.prototype._read = function() {
     // We have nothing to read
     if (!this.items.length) {
         // Nothing is processing, we end
@@ -94,7 +94,7 @@ CombinatorStream.prototype._read = function() {
  * @param {string} url
  * @returns {Promise}
  */
-CombinatorStream.prototype.parse = function(url) {
+AggregatorStream.prototype.parse = function(url) {
     var self = this;
     return new Promise(function(resolve, reject) {
         try {
@@ -128,7 +128,8 @@ CombinatorStream.prototype.parse = function(url) {
             parser.on("readable", function() {
                 var item;
                 while ((item = this.read())) {
-                    self.items.push(item);
+                    self.sortStream.write(item);
+                    //self.items.push(item);
                 }
             });
             parser.on("end", function() {
@@ -145,8 +146,8 @@ CombinatorStream.prototype.parse = function(url) {
  * @param {WritableStream} out
  * @returns {ReadableStream}
  */
-CombinatorStream.prototype.pipe = function(out) {
-    // Pipe sort stream to combinator
+AggregatorStream.prototype.pipe = function(out) {
+    // Pipe sort stream to aggregator
     Duplex.prototype.pipe.apply(this, [this.sortStream]);
     // Pipe output to readable stream
     return this.sortStream.pipe(out);
@@ -157,10 +158,10 @@ CombinatorStream.prototype.pipe = function(out) {
  * @param {WritableStream} out
  * @returns {ReadableStream}
  */
-CombinatorStream.prototype.unpipe = function() {
-    // Unpipe sortStream from combinator
+AggregatorStream.prototype.unpipe = function() {
+    // Unpipe sortStream from aggregator
     Duplex.prototype.unpipe.apply(this, [this.sortStream]);
 };
 
-util.inherits(CombinatorStream, Duplex);
-module.exports = CombinatorStream;
+util.inherits(AggregatorStream, Duplex);
+module.exports = AggregatorStream;

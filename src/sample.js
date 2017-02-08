@@ -12,18 +12,18 @@ var transformStream = new stream.Transform({
     }
 });
 
-var CombinatorStream = require(path.join(__dirname, "combinator"));
-var combinatorStream = new CombinatorStream();
+var AggregatorStream = require(path.join(__dirname, "aggregator"));
+var aggregatorStream = new AggregatorStream();
 // error event is emitted if an error occured on parsing
-combinatorStream.on("error", function(err) {
+aggregatorStream.on("error", function(err) {
     process.stderr.write(err.toString());
 });
 // end event is emitted when all feeds are parsed
-combinatorStream.on("end", function() {
+aggregatorStream.on("end", function() {
     process.stdout.write("end");
 });
 inputStream
-    .pipe(combinatorStream)
+    .pipe(aggregatorStream)
     .pipe(transformStream)
     .pipe(process.stdout);
 inputStream.push("http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
