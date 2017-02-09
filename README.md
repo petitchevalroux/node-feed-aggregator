@@ -1,6 +1,15 @@
 # node-feed-aggregator
 Duplex stream and cli command which aggregate rss/atom feeds
 
+## About
+
+### Command
+Command takes a [configuration file](https://github.com/petitchevalroux/node-feed-aggregator/blob/master/config/sample.json)
+with multiple feeds and output an aggregated feed sorted by decreasing publication date.
+
+### Package
+Package exposes a stream taking feed's urls as input and output all items sorted by decreasing publication date.
+
 ## Command install
 ```
 npm install -g "@petitchevalroux/node-feed-aggregator"
