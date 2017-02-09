@@ -20,7 +20,7 @@ Usage: node-feed-aggregator -c <config file> [-o <output file>] [-h]
 ```
 
 ## Configuration file
-See : [sample.js](https://github.com/petitchevalroux/node-feed-aggregator/blob/master/config/sample.json)
+See : [sample.json](https://github.com/petitchevalroux/node-feed-aggregator/blob/master/config/sample.json)
 
 ## Package install
 ```
