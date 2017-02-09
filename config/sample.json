@@ -1,0 +1,10 @@
+{
+    "title": "Sample feed title",
+    "feed_url":"https://github.com/petitchevalroux/node-feed-aggregator/commits/master.atom",
+    "site_url":"https://github.com/petitchevalroux/node-feed-aggregator",
+    "feeds":[
+        "https://github.com/petitchevalroux/node-feed-aggregator/commits/master.atom",
+        "https://news.ycombinator.com/rss",
+        "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+    ]
+}
