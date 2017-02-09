@@ -1,7 +1,7 @@
 {
   "name": "@petitchevalroux/node-feed-aggregator",
-  "version": "0.0.0",
-  "description": "Duplex stream and cli utility which aggregate rss/atom feeds",
+  "version": "0.0.1",
+  "description": "Duplex stream and cli command which aggregate rss/atom feeds",
   "main": "./src/aggregator.js",
   "scripts": {
     "test": "make tests"
