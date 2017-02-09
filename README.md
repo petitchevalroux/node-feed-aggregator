@@ -6,6 +6,11 @@ Duplex stream and cli command which aggregate rss/atom feeds
 npm install -g "@petitchevalroux/node-feed-aggregator"
 ```
 
+## Command update
+```
+npm update -g "@petitchevalroux/node-feed-aggregator"
+```
+
 ## Command usage
 ```
 Usage: node-feed-aggregator -c <config file> [-o <output file>] [-h]
