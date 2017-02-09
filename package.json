@@ -6,6 +6,7 @@
   "scripts": {
     "test": "make tests"
   },
+  "bin":{"node-feed-aggregator":"./src/cli.js"},
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/petitchevalroux/node-feed-aggregator.git"
@@ -28,7 +29,9 @@
     "@petitchevalroux/error": "^1.0.1",
     "async": "^2.1.4",
     "feedparser": "^2.1.0",
+    "minimist": "^1.2.0",
     "request": "^2.79.0",
+    "rss": "^1.2.2",
     "sort-stream": "^1.0.1"
   }
 }
