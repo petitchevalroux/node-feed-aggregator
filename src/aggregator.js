@@ -128,8 +128,7 @@ AggregatorStream.prototype.parse = function(url) {
             parser.on("readable", function() {
                 var item;
                 while ((item = this.read())) {
-                    self.sortStream.write(item);
-                    //self.items.push(item);
+                    self.items.push(item);
                 }
             });
             parser.on("end", function() {
