@@ -1,12 +1,14 @@
 {
   "name": "@petitchevalroux/node-feed-aggregator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Duplex stream and cli command which aggregate rss/atom feeds",
   "main": "./src/aggregator.js",
   "scripts": {
     "test": "make tests"
   },
-  "bin":{"node-feed-aggregator":"./src/cli.js"},
+  "bin": {
+    "node-feed-aggregator": "./src/cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/petitchevalroux/node-feed-aggregator.git"
