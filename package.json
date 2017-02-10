@@ -1,6 +1,6 @@
 {
   "name": "@petitchevalroux/node-feed-aggregator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Duplex stream and cli command which aggregate rss/atom feeds",
   "main": "./src/aggregator.js",
   "scripts": {
