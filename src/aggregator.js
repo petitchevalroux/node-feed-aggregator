@@ -81,6 +81,10 @@ function AggregatorStream(options) {
             callback();
         }
     });
+    self.sortedEnded = false;
+    this.outStream.on("finish", function() {
+        self.sortedEnded = true;
+    });
 }
 
 /**
@@ -94,7 +98,8 @@ AggregatorStream.prototype._write = function(chunk, enc, cb) {
     this.processingFeeds++;
     if (!this.started) {
         this.started = true;
-        this.inStream.pipe(this.sortStream)
+        this.inStream
+            .pipe(this.sortStream)
             .pipe(this.outStream);
     }
     this.queue.push(typeof chunk === "string" ? chunk : chunk.toString());
@@ -107,7 +112,7 @@ AggregatorStream.prototype._write = function(chunk, enc, cb) {
  */
 AggregatorStream.prototype._read = function() {
     if (this.sortedItems.length === 0) {
-        if (this.processingFeeds || this.unsortedItems.length) {
+        if (this.processingFeeds || !this.sortedEnded) {
             var stream = this;
             setImmediate(function() {
                 stream._read();
