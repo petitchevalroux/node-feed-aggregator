@@ -58,8 +58,8 @@ try {
             rss.item({
                 "title": item.title,
                 "description": item.description,
-                "url": item.url,
-                "guid": item.guid ? item.guid : item.url,
+                "url": item.link,
+                "guid": item.guid ? item.guid : item.link,
                 "date": item.pubdate ? item.pubdate : (item
                     .pubDate ? item.pubDate : item.date
                 ),
